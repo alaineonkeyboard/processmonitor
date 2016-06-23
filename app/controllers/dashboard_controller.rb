@@ -10,6 +10,7 @@ helper_method :sort_column, :sort_direction, :filter_text, :filter_column
 
   # POST
   def kill
+
     pid = params[:pid]
     Dashboard.kill(pid)
 
@@ -21,6 +22,7 @@ helper_method :sort_column, :sort_direction, :filter_text, :filter_column
 
   def schedule
     @schedules = Dashboard.get_schedules
+
   end
 
   

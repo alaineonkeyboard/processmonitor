@@ -82,7 +82,6 @@ class Dashboard
 	end
 
 
-
 	def self.kill(pid)
 		`kill #{pid}`
 	end

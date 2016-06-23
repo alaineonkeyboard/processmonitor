@@ -1,0 +1,64 @@
+<div class="jumbotron">
+  <h1>Here Be Scheduled Jobs</h1>
+
+  <!--
+  <%= form_tag schedule_create_path do %>
+  <fieldset>
+    <div>
+      <%= label_tag :cron_label, 'Generate new cron job:' %>
+      <%= text_field_tag :cron, params[:cron], {placeholder: "cron" } %>
+      <%= submit_tag "Generate", method: :post %>
+    </div>
+  </fieldset>
+  <% end %>
+-->
+
+
+</div>
+
+<% if notice %>
+<div class="alert alert-success">
+  <%= notice %>
+</div>
+<% end %>
+<% if alert %>
+<div class="alert alert-danger">
+  <%= alert %>
+</div>
+<% end %>
+
+<% if @schedules.size == 0 %>
+<div class="alert alert-danger">
+  <%= "No schedules here yet." %>
+</div>
+
+<% else %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Minute</th>
+      <th>Hour</th>
+      <th>Day</th>
+      <th>Month</th>
+      <th>Day of the Week</th>
+      <th>Command</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @schedules.each do |schedule| %>
+    <tr>
+      <td><%= schedule[:minute] %></td>
+      <td><%= schedule[:hour]  %></td>
+      <td><%= schedule[:day]  %></td>
+      <td><%= schedule[:month]  %></td>
+      <td><%= schedule[:day_of_week] %></td>
+      <td><%= schedule[:command]  %></td>
+    </tr>
+
+    <% end %>
+
+
+  </tbody>
+</table>
+<% end %>

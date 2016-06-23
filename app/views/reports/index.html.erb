@@ -26,6 +26,12 @@
 </div>
 <% end %>
 
+<% if @reports.size == 0 %>
+<div class="alert alert-danger">
+  <%= "No reports here yet." %>
+</div>
+
+<% else %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -105,5 +111,6 @@
   <!-- End Modal -->
   </tbody>
 </table>
+<% end %>
 
 

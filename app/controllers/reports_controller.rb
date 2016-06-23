@@ -4,6 +4,7 @@ class ReportsController < ApplicationController
   # GET /reports.json
   def index
     @reports = Report.all
+
   end
 
   def download
@@ -24,7 +25,7 @@ class ReportsController < ApplicationController
     
     if processes.length > 0
 
-      @report = Report.new(
+      report = Report.new(
         report_date: Time.now, 
         report_user: session[:user_name], 
         description: params[:description],
@@ -32,13 +33,13 @@ class ReportsController < ApplicationController
         filter_text: filter_text
         )
 
-      @report.report_details.build(processes)
+      report.report_details.build(processes)
 
       respond_to do |format|
-        if @report.save
+        if report.save
           format.html { redirect_to reports_index_path, notice: 
-            "New report generated on #{@report.report_date}"}
-        else format.html { redirect_to reports_index_path, alter: 
+            "New report generated on #{report.report_date}"}
+        else format.html { redirect_to reports_index_path, alert: 
             "Failed to generate report"}
         end
       end
