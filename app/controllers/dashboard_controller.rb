@@ -20,6 +20,7 @@ helper_method :sort_column, :sort_direction, :filter_text, :filter_column
   end
 
   def schedule
+    @schedules = Dashboard.get_schedules
   end
 
   

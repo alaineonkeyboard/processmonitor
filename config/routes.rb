@@ -7,19 +7,15 @@ Processmonitor::Application.routes.draw do
     get 'logout' => :destroy
   end
 
-  resources :users
-
   #get "sessions/create"
   #get "sessions/destroy"
   #resources :users
-
+  get "/", to: "dashboard#index"
+  get "dashboard", to: "dashboard#index"
   get "dashboard/index"
   post "dashboard/index"
   post "dashboard/kill"
   get "dashboard/schedule"
-  get "report_details/show"
-  get "report_details/create"
-  get "report_details/destroy"
   get "reports/index"
   post "reports/download"
   post "reports/create"

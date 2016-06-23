@@ -6,7 +6,7 @@
 		<div>
 			<%= label_tag :filter_label, 'Filter by:' %>
 			<%= select_options %>
-			<%= text_field_tag :filter, params[:filter] %>
+			<%= text_field_tag :filter, params[:filter], {placeholder: "filter" } %>
 			<%= submit_tag "Search", method: :get %>
 		</div>
 	</fieldset>
@@ -18,6 +18,13 @@
   <%= notice %>
 </div>
 <% end %>
+<% if alert %>
+<div class="alert alert-danger">
+  <%= alert %>
+</div>
+<% end %>
+
+
 <table class="table table-striped sortified">
 	<thead>
 		<tr>

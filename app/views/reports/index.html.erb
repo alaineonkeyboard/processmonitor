@@ -29,6 +29,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Report ID</th>
       <th>Report Date</th>
       <th>Created By</th>
       <th>Description</th>
@@ -40,10 +41,11 @@
   <tbody>
     <% @reports.each do |report| %>
     <tr>
+      <td><%= report.id %></td>
       <td><%= report.report_date %></td>
       <td><%= report.report_user %></td>
       <td><%= report.description %></td>
-      <td>column: <%= report.filter_column %>, text: <%= report.filter_text %></td>
+      <td><%= report.filter_column %> - "<%= report.filter_text %>"</td>
       <td>
         <button data-toggle="modal" data-target="#myModal<%= report.id %>">Details</button>
         <%= button_to 'Delete', reports_destroy_path(report_id: report), data: { confirm: 'Are you sure?' }, form: {style: 'display:inline-block;'} %>
