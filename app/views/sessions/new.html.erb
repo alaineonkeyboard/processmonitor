@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="Absolute-Center is-Responsive">
+      <div id="error-container">
+      	<% if flash[:alert] %>
+				<p><%= flash[:alert] %></p>
+				<% end %></div>
+      <div class="col-sm-12 col-md-10 col-md-offset-1">
+        <%= form_tag do %>
+          <div class="form-group input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <%= text_field_tag :name, params[:name], {class: "form-control", placeholder: "username"}  %>         
+          </div>
+          <div class="form-group input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <%= password_field_tag :password, params[:password], {class: "form-control", placeholder: "password"}  %> 
+          </div>
+          <div class="form-group">
+            <%= submit_tag "Login", 
+            {class: "btn btn-def btn-block"} %>
+          </div>
+          <div class="form-group text-center">
+            <a href="#">Forgot Password</a>&nbsp;|&nbsp;<a href="#">Support</a>
+          </div>
+         <% end %>
+
+      </div>  
+    </div>    
+  </div>
+</div>

@@ -1,0 +1,107 @@
+<div class="jumbotron">
+  <h1>Reports</h1>
+
+  <%= form_tag reports_create_path do %>
+  <fieldset>
+    <div>
+      <%= label_tag :filter_label, 'Generate new report:' %>
+      <%= select_options %>
+      <%= text_field_tag :filter, params[:filter], {placeholder: "filter" } %>
+      <%= text_field_tag :description, params[:description], {placeholder: "description" } %>
+      <%= submit_tag "Generate", method: :post %>
+    </div>
+  </fieldset>
+  <% end %>
+</div>
+
+<% if notice %>
+<div class="alert alert-success">
+  <%= notice %>
+</div>
+<% end %>
+
+<% if alert %>
+<div class="alert alert-danger">
+  <%= alert %>
+</div>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Report Date</th>
+      <th>Created By</th>
+      <th>Description</th>
+      <th>Filter Params</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reports.each do |report| %>
+    <tr>
+      <td><%= report.report_date %></td>
+      <td><%= report.report_user %></td>
+      <td><%= report.description %></td>
+      <td>column: <%= report.filter_column %>, text: <%= report.filter_text %></td>
+      <td>
+        <button data-toggle="modal" data-target="#myModal<%= report.id %>">Details</button>
+        <%= button_to 'Delete', reports_destroy_path(report_id: report), data: { confirm: 'Are you sure?' }, form: {style: 'display:inline-block;'} %>
+        <%= button_to 'Download', reports_download_path(format: "csv", report_id: report), form: {style: 'display:inline-block;'} %>
+      </td>
+    </tr>
+
+
+    <!-- Modal -->
+    <div id="myModal<%= report.id %>" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Report Details</h4>
+          </div>
+          <div class="modal-body" style="overflow:scroll; height:600px;">
+            <div class="container">
+                        <div class="row">
+                          <div class="col-sm-1">Process ID</div>
+                          <div class="col-sm-1">Process GID</div>
+                          <div class="col-sm-1">Process Name</div>
+                          <div class="col-sm-1">Process User</div>
+                          <div class="col-sm-1">CPU Consumption</div>
+                          <div class="col-sm-1">MEM Consumption</div>
+                          <div class="col-sm-4">Full Command</div>
+                          <div class="col-sm-1">Start time</div>
+                          <div class="col-sm-1">Elapsed time</div>
+                        </div>
+
+                        <% report.report_details.each do |detail| %>
+                      <div class="row">
+                        <div class="col-sm-1"><%= detail.process_id %></div>
+                        <div class="col-sm-1"><%= detail.process_group_id %></div>
+                        <div class="col-sm-1"><%= detail.process_name %></div>
+                        <div class="col-sm-1"><%= detail.process_user %></div>
+                        <div class="col-sm-1"><%= detail.cpu_consumption %></div>
+                        <div class="col-sm-1"><%= detail.mem_consumption %></div>
+                        <div class="col-sm-4"><%= detail.full_command %></div>
+                        <div class="col-sm-1"><%= detail.start_time %></div>
+                        <div class="col-sm-1"><%= detail.elapsed_time %></div>
+                      </div>
+                        <% end %>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <% end %>
+  <!-- End Modal -->
+  </tbody>
+</table>
+
+
